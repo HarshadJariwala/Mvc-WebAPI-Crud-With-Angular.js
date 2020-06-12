@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.852
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{06F5B906-7B72-4D7D-A082-92AA2B486EB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularPractice", "AngularPractice\AngularPractice.csproj", "{1C387E10-6194-4207-816B-87CA33CEA22C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06F5B906-7B72-4D7D-A082-92AA2B486EB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06F5B906-7B72-4D7D-A082-92AA2B486EB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06F5B906-7B72-4D7D-A082-92AA2B486EB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06F5B906-7B72-4D7D-A082-92AA2B486EB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C387E10-6194-4207-816B-87CA33CEA22C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C387E10-6194-4207-816B-87CA33CEA22C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C387E10-6194-4207-816B-87CA33CEA22C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C387E10-6194-4207-816B-87CA33CEA22C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {126B6018-D49D-4D68-99BF-79626146B57C}
+	EndGlobalSection
+EndGlobal
