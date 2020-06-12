@@ -1,0 +1,199 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>-->
+    <script src="../../Scripts/ng-file-upload-shim.min.js"></script>
+    <script src="../../Scripts/ng-file-upload-all.js"></script>
+    <script src="../../Scripts/ng-file-upload.js"></script>
+</head>
+<body>
+    <div ng-app="myApp" ng-controller="EmployeeController">
+        <a class="btn-info btn-lg" ui-sref="EmployeeList" ui-sref-active="active">Home</a>&nbsp; &nbsp; &nbsp;
+        <a class="btn-info btn-lg" ui-sref="EmployeeInsert" ui-sref-active="active">Add Employee</a>
+        <hr/>
+        <center><h2>{{Header}}</h2></center><br />
+
+        <form id="input-container" name="myForm" method="post" enctype="multipart/form-data" novalidate>
+            <div class="form-group col-md-12">
+                <div class="col-md-4 offset-md-8">
+                    <labal>First Name :</labal>
+                    <input type="text" ng-model="Employee.FirstName" ng-minlength="3" class="form-control" id="FirstName" name="FirstName" placeholder="Enter FirstName" required />
+                    <span style="color:red" ng-show="myForm.FirstName.$error.required && hasError">Please Enter FirstName</span>
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div class="col-md-4 offset-md-8">
+                    <labal>Last Name :</labal>
+                    <input type="text" id="LastName" ng-model="Employee.LastName" ng-minlength="3" class="form-control" name="LastName" placeholder="Enter LastName" required />
+                    <span ng-show="myForm.LastName.$error.required && hasError" style="color:red">Please Enter LastName</span>
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div class="col-md-4 offset-md-8">
+                    <labal>Gender :</labal>
+                    <input type="radio" id="Gender1" ng-model="Employee.Gender" name="Male" value="Male" />
+                    <labal>Male </labal>
+                    <input type="radio" id="Gender2" ng-model="Employee.Gender" name="Female" value="Female" />
+                    <labal>Female </labal>
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div class="col-md-4 offset-md-8">
+                    <labal>Email :</labal>
+                    <input type="email" id="Email" ng-model="Employee.Email" autocomplete="off" name="Email" class="form-control" ng-pattern="EmailPattren" placeholder="Enter Email" required />
+                    <span ng-show="myForm.Email.$error.email && hasError" style="color:red">Email Not Valid</span>
+                    <span ng-show="myForm.Email.$error.required && hasError" style="color:red">Please Enter Email</span>
+                    <span style="color:red;" class="error" ng-show="myForm.Email.$error.pattern">inValid Email!</span>
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div class="col-md-4 offset-md-8">
+                    <labal>Martial Status :</labal>
+                    <input type="checkbox" id="MarialStatus" ng-model="Employee.MarialStatus" name="MarialStatus" @title="Are You merried" />
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div class="col-md-4 offset-md-8">
+                    <label>BirthDate :</label>
+                    <p class="input-group">
+                        <input type="date" class="form-control" uib-datepicker-popup ng-model="Employee.BirthDate" is-open="popup.opened" ng-change="GetAge(Employee.BirthDate)" close-text="Close" required/>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                    <span ng-show="myForm.BirthDate.$error.required && hasError" style="color:red">Please Enter BirthDate</span>
+                    <span style="color:red;" ng-show="IsInvalidage">Age Should be Grater than 18 </span>
+                    <span style="color:red;" ng-show="myForm.BirthDate.$dirty">inValid BirthDate!</span>
+                </div>
+
+            </div>
+
+            <div class="form-group col-md-12">
+                <div class="col-md-3 offset-md-8">
+                    <label>Hobbies :</label>
+                    <select name="Hobbies" id="Hobbies" ng-model="Employee.Hobbies" multiple="multiple" class="form-control" required>
+                        <option value="Reading">Reading</option>
+                        <option value="Surfing">Surfing</option>
+                        <option value="Singing">Singing</option>
+                        <option value="Writing">Writing</option>
+                    </select>
+                    <span ng-show="myForm.Hobbies.$error.required && hasError" style="color:red">Please choices Maximum Any Two</span>
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div class="col-md-3 offset-md-8">
+                    <label>Photo :</label>
+                    <input type="file" name="myFile" file-model="myFile" />
+                    <!--<span ng-show="myForm.Photo.$error.required && hasError" style="color:red">Please Upload Image</span>-->
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div class="col-md-4 offset-md-8">
+                    <label>Salary :</label>
+                    <input type="text" id="Salary" ng-model="Employee.Salary" name="Salary" class="form-control" placeholder="Enter Salary" required />
+                    <span ng-show="myForm.Salary.$error.required && hasError" style="color:red">Please Enter Salary</span>
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div class="col-md-4 offset-md-8">
+                    <label>Address :</label>
+                    <textarea id="Address" name="Address" ng-model="Employee.Address" class="form-control" placeholder="Enter Address" required></textarea>
+                    <span ng-show="myForm.Address.$error.required && hasError" style="color:red">Please Enter Address</span>
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div class="col-md-4 offset-md-8">
+                    <label>Country :</label>
+                    <select id="CountryID"
+                            name="CountryID"
+                            ng-options="c.CountryID as c.CountryName for c in CountryList"
+                            ng-model="Employee.CountryID"
+                            ng-change="GetState(Employee.CountryID)"
+                            class="form-control"
+                            ng-required="true"
+                            required>
+                        <option value="">--Select Country--</option>
+                        <option ng-repeat="x in CountryList" value="{{x.CountryID}}">{{x.CountryName}}</option>
+                    </select>
+                    <span ng-show="myForm.CountryID.$error.required && hasError" style="color:red">Please Select Country</span>
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div class="col-md-4 offset-md-8">
+                    <label>State :</label>
+                    <select id="StateID"
+                            name="StateID"
+                            ng-options="s.StateID as s.StateName for s in StateList"
+                            ng-model="Employee.StateID"
+                            ng-change="GetCity(Employee.StateID)"
+                            class="form-control"
+                            ng-required="true"
+                            required>
+                        <option value="">--Select State--</option>
+                        <option ng-repeat="x in StateList" value="{{x.StateID}}">{{x.StateName}}</option>
+                    </select>
+                    <span ng-show="myForm.StateID.$error.required && hasError" style="color:red">Please Select State</span>
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div class="col-md-4 offset-md-8">
+                    <label>City :</label>
+                    <select id="CityID"
+                            name="CityID"
+                            ng-options="m.CityID as m.CityName for m in CityList"
+                            ng-model="Employee.CityID"
+                            class="form-control"
+                            ng-required="true"
+                            required>
+                        <option value="">--Select City--</option>
+                        <option data-ng-repeat="x in CityList" value="{{x.CityID}}">{{x.CityName}}</option>
+                    </select>
+                    <span ng-show="myForm.CityID.$error.required && hasError" style="color:red">Please Select City</span>
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div class="col-md-4 offset-md-8">
+                    <label>Zip code :</label>
+                    <input type="text" id="Zipcode" ng-model="Employee.Zipcode" class="form-control" maxlength="6" ng-pattern="ZipCodePattren" name="Zipcode" placeholder="Enter Zipcode" required />
+                    <span ng-show="myForm.Zipcode.$error.required && hasError" style="color:red">Please Enter ZipCode</span>
+                    <span ng-show="myForm.Zipcode.$error.pattern" style="color:red">It should contain 6 Numbers</span>
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div class="col-md-4 offset-md-8">
+                    <label>Password :</label>
+                    <input type="password" id="Password" ng-model="Employee.Password" autocomplete="off" class="form-control" ng-pattern="/^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?!.*\s).{8,}$/" name="Password" placeholder="Enter Password" ng-minlength="8" required />
+                    <span ng-show="myForm.Password.$error.required && hasError" style="color:red">Please Enter Password</span>
+                    <span style="color:red;" class="error" ng-show="myForm.Password.$error.pattern">
+                        Password should be at least 8 characters
+                        long and should contain one number,one character and one special
+                        character
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div class="col-md-4 offset-md-8">
+                    <input type="button" id="btnSave" value="Submit" ng-click="Save()" class="btn-lg btn-info" />
+                    <input type="button" ng-click="Cancel()" value="Cancel" class="btn-lg btn-info" />
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

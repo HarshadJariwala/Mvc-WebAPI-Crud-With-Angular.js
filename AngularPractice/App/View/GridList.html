@@ -1,0 +1,28 @@
+﻿
+<link href="../../Content/ui-grid.css" rel="stylesheet" />
+<script src="../../Scripts/angular.js"></script>
+<script src="../../Scripts/ui-grid.js"></script>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee</title>
+    <link href="Grid.css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://ui-grid.info/release/ui-grid.css" type="text/css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="http://ui-grid.info/release/ui-grid.js"></script>
+
+
+</head>
+<body>
+    <h2>Employee</h2>
+    <form ng-app="myApp" name="myForm" ng-controller="ListController" novalidate>
+        <div ui-grid="{data: Employees}" ui-grid-pagination ui-grid-selection class="myGrid" ui-grid-auto-resize>
+
+        </div>
+    </form>
+</body>
+</html>
+
+

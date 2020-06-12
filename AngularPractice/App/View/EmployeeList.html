@@ -1,0 +1,24 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="../../Scripts/moment.js"></script>
+    <script src="../../Scripts/moment-timezone.js"></script>
+</head>
+<body>
+    <div ng-app="myApp" ng-controller="ListController">
+
+        <h2>{{Header}}</h2><br />
+
+        <p align="left">
+            <a class="btn-lg btn-info" ui-sref="EmployeeInsert" ui-sref-active="active">Add Employee</a>
+        </p>
+        <p align="right">
+            <input type="button" ng-click="logout()" value="Sign Out" class="btn btn-success" />
+        </p>
+        <div ui-grid="GridOptions" ui-grid-resize-columns ui-grid-move-columns ui-grid-pagination ui-grid-selection ui-grid-exporter class="myGrid text-warning" ui-grid-auto-resize>
+
+        </div>
+    </div>
+</body>
+</html>
